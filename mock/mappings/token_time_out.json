@@ -1,0 +1,10 @@
+{
+    "request": {
+      "method": "GET",
+      "urlPath": "/v1/validation/b05e1d1af5454fdba31915e50db0549c"
+    },
+    "response": {
+      "status": 200,
+      "fixedDelayMilliseconds": 600
+    }
+}

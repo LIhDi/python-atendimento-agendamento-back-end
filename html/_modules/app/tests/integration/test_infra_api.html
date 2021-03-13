@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>app.tests.integration.test_infra_api &#8212; app 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for app.tests.integration.test_infra_api</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">from</span> <span class="nn">sanic.testing</span> <span class="kn">import</span> <span class="n">SanicTestClient</span>
+
+
+<div class="viewcode-block" id="test_sanic_status_endpoint"><a class="viewcode-back" href="../../../../app.tests.integration.html#app.tests.integration.test_infra_api.test_sanic_status_endpoint">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">IT</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">test_sanic_status_endpoint</span><span class="p">(</span><span class="n">test_cli</span><span class="p">:</span> <span class="n">SanicTestClient</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">test_cli</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/v1/status/ping&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="n">json_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">json_response</span><span class="p">[</span><span class="s2">&quot;pong&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="test_health_check_success"><a class="viewcode-back" href="../../../../app.tests.integration.html#app.tests.integration.test_infra_api.test_health_check_success">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">IT</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">test_health_check_success</span><span class="p">(</span><span class="n">test_cli</span><span class="p">:</span> <span class="n">SanicTestClient</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">test_cli</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/v1/status/healthcheck&quot;</span><span class="p">)</span>
+    <span class="n">expected_response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;isCritical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MySQL&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;UP&quot;</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;All dependencies are up&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;UP&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span>
+    <span class="k">assert</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="n">expected_response</span></div>
+
+
+<div class="viewcode-block" id="test_critical_service_fail"><a class="viewcode-back" href="../../../../app.tests.integration.html#app.tests.integration.test_infra_api.test_critical_service_fail">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">IT</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">test_critical_service_fail</span><span class="p">(</span><span class="n">test_cli</span><span class="p">:</span> <span class="n">SanicTestClient</span><span class="p">):</span>
+    <span class="k">await</span> <span class="n">test_cli</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">test_cli</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/v1/status/healthcheck&quot;</span><span class="p">)</span>
+    <span class="n">expected_response</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;dependencies&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;DatabaseBackend is not running&quot;</span><span class="p">,</span> <span class="s2">&quot;isCritical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MySQL&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;DOWN&quot;</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;All dependencies are down&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;DOWN&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">404</span>
+    <span class="k">assert</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span> <span class="o">==</span> <span class="n">expected_response</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">app</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html">App Atendimento Agendamento Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#features">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../readme.html#credits">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../history.html">History</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Lihdi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

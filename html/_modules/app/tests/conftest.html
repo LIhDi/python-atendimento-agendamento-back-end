@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>app.tests.conftest &#8212; app 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for app.tests.conftest</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">os_path</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">path</span> <span class="k">as</span> <span class="n">sys_path</span>
+<span class="kn">from</span> <span class="nn">databases</span> <span class="kn">import</span> <span class="n">Database</span>
+
+
+
+<span class="n">sys_path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os_path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os_path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os_path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;..&quot;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">tests.data</span> <span class="kn">import</span> <span class="n">units_list</span>
+<span class="kn">from</span> <span class="nn">server</span> <span class="kn">import</span> <span class="n">prepare</span>
+<span class="kn">from</span> <span class="nn">settings</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">clients</span> <span class="kn">import</span> <span class="n">HttpClient</span><span class="p">,</span> <span class="n">AwsClient</span>
+<span class="kn">from</span> <span class="nn">repository</span> <span class="kn">import</span> <span class="n">AtendimentoRepository</span><span class="p">,</span> <span class="n">UnidadeRepository</span>
+<span class="kn">from</span> <span class="nn">services</span> <span class="kn">import</span> <span class="n">AuthenticationService</span><span class="p">,</span> <span class="n">AtendimentoService</span><span class="p">,</span> <span class="n">UnidadeService</span>
+
+
+<div class="viewcode-block" id="sanic_app"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.sanic_app">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">sanic_app</span><span class="p">():</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">prepare</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">app</span></div>
+
+
+<div class="viewcode-block" id="logger"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.logger">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">logger</span><span class="p">():</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="n">numeric_level</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">logging</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">numeric_level</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logger</span></div>
+
+
+<div class="viewcode-block" id="test_db"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.test_db">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">test_db</span><span class="p">():</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="n">units_list</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;units&quot;</span><span class="p">:</span> <span class="n">units</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="units"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.units">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">units</span><span class="p">(</span><span class="n">test_db</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">test_db</span><span class="p">[</span><span class="s2">&quot;units&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="authentication_service"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.authentication_service">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">authentication_service</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">AuthenticationService</span><span class="p">(</span><span class="n">HttpClient</span><span class="p">(</span><span class="n">settings</span><span class="p">),</span> <span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="aws_client"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.aws_client">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">aws_client</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">AwsClient</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="db"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.db">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">db</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Database</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">DB_URL</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="connected_db"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.connected_db">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">connected_db</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">db</span></div>
+
+
+<div class="viewcode-block" id="unidade_repository"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.unidade_repository">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">unidade_repository</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">UnidadeRepository</span><span class="p">(</span><span class="n">db</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="unidade_service"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.unidade_service">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">unidade_service</span><span class="p">(</span><span class="n">unidade_repository</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">UnidadeService</span><span class="p">(</span><span class="n">unidade_repository</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="atendimento_repository"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.atendimento_repository">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">atendimento_repository</span><span class="p">(</span><span class="n">db</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">AtendimentoRepository</span><span class="p">(</span><span class="n">db</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="atendimento_service"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.atendimento_service">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">atendimento_service</span><span class="p">(</span><span class="n">atendimento_repository</span><span class="p">,</span> <span class="n">aws_client</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">AtendimentoService</span><span class="p">(</span><span class="n">HttpClient</span><span class="p">(</span><span class="n">settings</span><span class="p">),</span>
+                                <span class="n">settings</span><span class="p">,</span>
+                                <span class="n">atendimento_repository</span><span class="p">,</span>
+                                <span class="n">aws_client</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="test_cli"><a class="viewcode-back" href="../../../app.tests.html#app.tests.conftest.test_cli">[docs]</a><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">test_cli</span><span class="p">(</span><span class="n">loop</span><span class="p">,</span> <span class="n">sanic_app</span><span class="p">,</span> <span class="n">sanic_client</span><span class="p">,</span>
+             <span class="n">atendimento_service</span><span class="p">,</span>
+             <span class="n">authentication_service</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span>
+
+    <span class="n">sanic_app</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">db</span>
+    <span class="n">sanic_app</span><span class="o">.</span><span class="n">atendimento_service</span> <span class="o">=</span> <span class="n">atendimento_service</span>
+    <span class="n">sanic_app</span><span class="o">.</span><span class="n">authenticator_service</span> <span class="o">=</span> <span class="n">authentication_service</span>
+    <span class="n">sanic_app</span><span class="o">.</span><span class="n">aws_client</span> <span class="o">=</span> <span class="n">AwsClient</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">yield</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">sanic_client</span><span class="p">(</span><span class="n">sanic_app</span><span class="p">))</span></div>
+
+
+
+
+
+
+
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">app</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html">App Atendimento Agendamento Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html#features">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../readme.html#credits">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../history.html">History</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Lihdi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

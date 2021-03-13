@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>app.models package &#8212; app 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="app-models-package">
+<h1>app.models package<a class="headerlink" href="#app-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app.models.enum.html">app.models.enum package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app.models.enum.html#module-app.models.enum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-app.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="app.models.Appointment">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">Appointment</code><span class="sig-paren">(</span><em class="sig-param">appointments_json</em>, <em class="sig-param">remove_keys: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/models.html#Appointment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Appointment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.AppointmentsType">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">AppointmentsType</code><a class="reference internal" href="_modules/app/models.html#AppointmentsType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.AppointmentsType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="app.models.AppointmentsType.DEFAULT">
+<code class="sig-name descname">DEFAULT</code><em class="property"> = ['dflag', 'updated_at', 'created_at', 'id_person', 'id_subject']</em><a class="headerlink" href="#app.models.AppointmentsType.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.Assunto">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">Assunto</code><span class="sig-paren">(</span><em class="sig-param">assunto_json</em>, <em class="sig-param">remove_keys: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/models.html#Assunto"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Assunto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.AssuntoType">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">AssuntoType</code><a class="reference internal" href="_modules/app/models.html#AssuntoType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.AssuntoType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="app.models.AssuntoType.DEFAULT">
+<code class="sig-name descname">DEFAULT</code><em class="property"> = ['dflag', 'updated_at', 'created_at']</em><a class="headerlink" href="#app.models.AssuntoType.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.Message">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param">message</em>, <em class="sig-param">marketplace_id</em>, <em class="sig-param">type='notification.sms'</em>, <em class="sig-param">event='send.sms'</em>, <em class="sig-param">resource='teste'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/models.html#Message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.Person">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">Person</code><span class="sig-paren">(</span><em class="sig-param">person_json</em>, <em class="sig-param">remove_keys: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/models.html#Person"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.PersonsType">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">PersonsType</code><a class="reference internal" href="_modules/app/models.html#PersonsType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.PersonsType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="app.models.PersonsType.DEFAULT">
+<code class="sig-name descname">DEFAULT</code><em class="property"> = ['dflag', 'updated_at', 'created_at']</em><a class="headerlink" href="#app.models.PersonsType.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.Status">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">Status</code><span class="sig-paren">(</span><em class="sig-param">status_json</em>, <em class="sig-param">remove_keys: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/models.html#Status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.StatusType">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">StatusType</code><a class="reference internal" href="_modules/app/models.html#StatusType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.StatusType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="app.models.StatusType.DEFAULT">
+<code class="sig-name descname">DEFAULT</code><em class="property"> = ['dflag', 'updated_at', 'created_at']</em><a class="headerlink" href="#app.models.StatusType.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.Unidade">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">Unidade</code><span class="sig-paren">(</span><em class="sig-param">unidade_json</em>, <em class="sig-param">remove_keys: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/models.html#Unidade"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.Unidade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="app.models.UnidadesType">
+<em class="property">class </em><code class="sig-prename descclassname">app.models.</code><code class="sig-name descname">UnidadesType</code><a class="reference internal" href="_modules/app/models.html#UnidadesType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.models.UnidadesType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="app.models.UnidadesType.DEFAULT">
+<code class="sig-name descname">DEFAULT</code><em class="property"> = ['dflag', 'updated_at', 'created_at']</em><a class="headerlink" href="#app.models.UnidadesType.DEFAULT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">app</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">App Atendimento Agendamento Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#features">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#credits">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Lihdi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/app.models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

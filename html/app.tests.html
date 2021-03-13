@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>app.tests package &#8212; app 1.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="app-tests-package">
+<h1>app.tests package<a class="headerlink" href="#app-tests-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="app.tests.data.html">app.tests.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.data.html#module-app.tests.data">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app.tests.integration.html">app.tests.integration package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.integration.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.integration.html#module-app.tests.integration.test_infra_api">app.tests.integration.test_infra_api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.integration.html#module-app.tests.integration.test_unidades_repository">app.tests.integration.test_unidades_repository module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.integration.html#module-app.tests.integration">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="app.tests.unit.html">app.tests.unit package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit.test_authenticator_service">app.tests.unit.test_authenticator_service module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit.test_health_check">app.tests.unit.test_health_check module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit.test_models">app.tests.unit.test_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit.test_unidades_api">app.tests.unit.test_unidades_api module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit.test_unidades_repository">app.tests.unit.test_unidades_repository module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit.test_unidades_service">app.tests.unit.test_unidades_service module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit.test_util">app.tests.unit.test_util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="app.tests.unit.html#module-app.tests.unit">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-app.tests.conftest">
+<span id="app-tests-conftest-module"></span><h2>app.tests.conftest module<a class="headerlink" href="#module-app.tests.conftest" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.tests.conftest.atendimento_repository">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">atendimento_repository</code><span class="sig-paren">(</span><em class="sig-param">db</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#atendimento_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.atendimento_repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.atendimento_service">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">atendimento_service</code><span class="sig-paren">(</span><em class="sig-param">atendimento_repository</em>, <em class="sig-param">aws_client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#atendimento_service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.atendimento_service" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.authentication_service">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">authentication_service</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#authentication_service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.authentication_service" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.aws_client">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">aws_client</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#aws_client"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.aws_client" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.connected_db">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">connected_db</code><span class="sig-paren">(</span><em class="sig-param">db</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#connected_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.connected_db" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.db">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">db</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.db" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.logger">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">logger</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.logger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.sanic_app">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">sanic_app</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#sanic_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.sanic_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.test_cli">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">test_cli</code><span class="sig-paren">(</span><em class="sig-param">loop</em>, <em class="sig-param">sanic_app</em>, <em class="sig-param">sanic_client</em>, <em class="sig-param">atendimento_service</em>, <em class="sig-param">authentication_service</em>, <em class="sig-param">db</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#test_cli"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.test_cli" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.test_db">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">test_db</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#test_db"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.test_db" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.unidade_repository">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">unidade_repository</code><span class="sig-paren">(</span><em class="sig-param">db</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#unidade_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.unidade_repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.unidade_service">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">unidade_service</code><span class="sig-paren">(</span><em class="sig-param">unidade_repository</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#unidade_service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.unidade_service" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="app.tests.conftest.units">
+<code class="sig-prename descclassname">app.tests.conftest.</code><code class="sig-name descname">units</code><span class="sig-paren">(</span><em class="sig-param">test_db</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/tests/conftest.html#units"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#app.tests.conftest.units" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-app.tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-app.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">app</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">App Atendimento Agendamento Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#features">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#credits">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Lihdi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/app.tests.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/v1/validation/5ef7b678a8934b5487ed352652976dbf"
+  },
+  "response": {
+    "status": 404
+  }
+}

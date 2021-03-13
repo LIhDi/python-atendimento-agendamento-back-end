@@ -1,0 +1,7 @@
+-r requirements.txt
+
+sphinx==2.4.4
+json-logging-py==0.2
+jaraco.packaging>=3.2
+rst.linker>=1.9
+pytest-checkdocs==1.2.3
