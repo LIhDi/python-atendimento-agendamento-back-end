@@ -60,6 +60,7 @@ class Unidade:
         unidade = dict(unidade_json)
         self.name = unidade.get("name")
         self.code = unidade.get("code")
+        self.attendants_number = unidade.get("attendants_number")
         self.description = unidade.get("description")
         self.phone = unidade.get("phone")
         self.email = unidade.get("email")

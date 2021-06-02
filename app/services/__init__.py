@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from exceptions import NotAcceptableException
 from util.loggers import logger
 
@@ -36,21 +35,25 @@ class AtendimentoService:
         self.atendimento_repository = atendimento_repository
 
 
-class AgendamentoService:
-    def __init__(self, agendamento_repository):
-        self.agendamento_repository = agendamento_repository
+class AppointmentsService:
+    def __init__(self, appointments_repository):
+        self.appointments_repository = appointments_repository
 
     async def find_all(self):
         logger.debug("SERVICE find all appointments.")
-        return await self.agendamento_repository.find_all()
+        return await self.appointments_repository.find_all()
+
+    async def find_by_id(self, appointment_id):
+        logger.debug("SERVICE find appointment by id.")
+        return await self.appointments_repository.find_by_id(appointment_id)
 
     async def find_by_status(self, status_code, national_registration):
         logger.debug(f"SERVICE find appointments by status - {status_code}.")
-        return await self.agendamento_repository.find_by_status(status_code, national_registration)
+        return await self.appointments_repository.find_by_status(status_code, national_registration)
 
     async def find_status_by_code(self, status_code):
         logger.debug(f"SERVICE find status by code - {status_code}.")
-        db_status = await self.agendamento_repository.find_status_by_code(status_code)
+        db_status = await self.appointments_repository.find_status_by_code(status_code)
         if not db_status:
             raise NotAcceptableException(
                 f"Appointment status is invalid. There is no status for - {status_code}.")
@@ -58,69 +61,100 @@ class AgendamentoService:
 
     async def find_all_status(self):
         logger.debug("SERVICE find all status.")
-        return await self.agendamento_repository.find_all_status()
+        return await self.appointments_repository.find_all_status()
+    
+    async def cancel(self, appointment_id):
+        logger.debug("SERVICE appointment cancelation.")
+        return await self.appointments_repository.cancel(appointment_id)
+    
+    async def save(self, appointment):
+        logger.debug("SERVICE save appointment.")
+        dates = self.dates_to_update(db_unit)
+        appointment.update(dates)
+        appointment = await self.appointments_repository.save(unit)
+        return appointment
+
+    def dates_to_update(self, appointment):
+        if appointment is not None:
+            dates = {"updated_at": datetime.utcnow()}
+        else:
+            dates = {"created_at": datetime.utcnow(), "dflag": False}
+        return dates
 
 
-class UnidadeService:
-    def __init__(self, unidade_repository):
-        self.unidade_repository = unidade_repository
+class UnitsService:
+    def __init__(self, units_repository):
+        self.units_repository = units_repository
 
     async def find_all(self, active):
-        logger.debug("SERVICE find all unidades.")
-        return await self.unidade_repository.find_all(active)
+        logger.debug("SERVICE find all units.")
+        return await self.units_repository.find_all(active)
 
-    async def find_by_code(self, code_unidade):
-        logger.debug("SERVICE find unidade by code.")
-        return await self.unidade_repository.find_by_code(code_unidade)
+    async def find_by_code(self, code_unit):
+        logger.debug("SERVICE find unit by code.")
+        return await self.units_repository.find_by_code(code_unit)
 
-    async def save(self, unidade):
-        logger.debug("SERVICE save unidade.")
-        db_unidade = await self.unidade_repository.find_by_code(unidade["code"])
-        dates = self.dates_to_update(db_unidade)
-        unidade.update(dates)
-        unidade = await self.unidade_repository.save(db_unidade, unidade)
-        return unidade
+    async def save(self, unit):
+        logger.debug("SERVICE save unit.")
+        db_unit = await self.units_repository.find_by_code(unit["code"])
+        dates = self.dates_to_update(db_unit)
+        unit.update(dates)
+        unit = await self.units_repository.save(db_unit, unit)
+        return unit
 
-    def dates_to_update(self, db_unidade):
-        if db_unidade is not None:
+    def dates_to_update(self, db_unit):
+        if db_unit is not None:
             dates = {"updated_at": datetime.utcnow()}
         else:
             dates = {"created_at": datetime.utcnow(), "dflag": False}
         return dates
 
 
-class AssuntoService:
-    def __init__(self, assunto_repository):
-        self.assunto_repository = assunto_repository
+class SubjectsService:
+    def __init__(self, subjects_repository):
+        self.subjects_repository = subjects_repository
 
     async def find_all(self, active ):
-        logger.debug("SERVICE find all assuntos.")
-        return await self.assunto_repository.find_all(active)
+        logger.debug("SERVICE find all subjects.")
+        return await self.subjects_repository.find_all(active)
 
-    async def find_by_code(self, code_assunto):
-        logger.debug("SERVICE find assuntos by code.")
-        return await self.assunto_repository.find_by_code(code_assunto)
+    async def find_by_code(self, code_subject):
+        logger.debug("SERVICE find subjects by code.")
+        return await self.subjects_repository.find_by_code(code_subject)
 
-    async def save(self, assunto):
-        logger.debug("SERVICE save assunto.")
-        db_assunto = await self.assunto_repository.find_by_code(assunto["code"])
-        dates = self.dates_to_update(db_assunto)
-        assunto.update(dates)
-        assunto = await self.assunto_repository.save(db_assunto, assunto)
-        return assunto
+    async def save(self, subject):
+        logger.debug("SERVICE save subject.")
+        db_subject = await self.subjects_repository.find_by_code(subject["code"])
+        dates = self.dates_to_update(db_subject)
+        subject.update(dates)
+        subject = await self.subjects_repository.save(db_subject, subject)
+        return subject
 
-    def dates_to_update(self, db_assunto):
-        if db_assunto is not None:
+    def dates_to_update(self, db_subject):
+        if db_subject is not None:
             dates = {"updated_at": datetime.utcnow()}
         else:
             dates = {"created_at": datetime.utcnow(), "dflag": False}
         return dates
+    
+    async def deactivate(self, subject):
+        logger.debug("SERVICE deactivate subject.")
+        subject = await self.subjects_repository.deactivate(subject)
+        return subject
 
+class SchedulesService:
+    def __init__(self, schedules_repository):
+        self.schedules_repository = schedules_repository
 
-class PessoaService:
-    def __init__(self, pessoa_repository):
-        self.pessoa_repository = pessoa_repository
+    async def find_all(self, status):
+        logger.debug("SERVICE find all schedules.")
+        return await self.schedules_repository.find_all(status) 
 
-    async def find_by_national_registration(self, national_registration):
-        logger.debug("SERVICE find by national registration.")
-        return await self.pessoa_repository.find_by_national_registration(national_registration)
+    async def save(self, schedules):
+        logger.debug("SERVICE save schedules.")
+        for schedule in schedules:
+            schedule_status = self.schedules_repository.find_status_by_code(schedule["code"])
+            schedule["id_schedule_status"] = schedule_status["id_int"]
+            logger.debug(schedule)
+            await self.schedules_repository.save(schedule)
+        return schedules

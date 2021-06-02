@@ -3,10 +3,11 @@ import server
 from databases import Database
 from settings import settings
 from clients import AwsClient, HttpClient
-from repository import AtendimentoRepository, AgendamentoRepository, UnidadeRepository, AssuntoRepository, \
-  PessoaRepository
-from services import AuthenticationService, AtendimentoService, AgendamentoService, UnidadeService, AssuntoService, \
-  PessoaService
+from repository import AtendimentoRepository, AppointmentsRepository
+from repository import UnitsRepository, SubjectsRepository
+from repository.schedules import SchedulesRepository
+from services import AppointmentsService, UnitsService, SubjectsService
+from services import AuthenticationService, AtendimentoService, SchedulesService
 
 db = Database(settings.DB_URL)
 aws_client = AwsClient(settings)
@@ -20,26 +21,26 @@ atendimento_service = AtendimentoService(http_client,
                                             atendimento_repository,
                                             aws_client)
 
-agendamento_repository = AgendamentoRepository(db=db)
-agendamento_service = AgendamentoService(agendamento_repository)
+appointments_repository = AppointmentsRepository(db=db)
+appointments_service = AppointmentsService(appointments_repository)
 
-unidade_repository = UnidadeRepository(db=db)
-unidade_service = UnidadeService(unidade_repository)
+schedules_repository = SchedulesRepository(db=db)
+schedules_service = SchedulesService(schedules_repository)
 
-assunto_repository = AssuntoRepository(db=db)
-assunto_service = AssuntoService(assunto_repository)
+units_repository = UnitsRepository(db=db)
+units_service = UnitsService(units_repository)
 
-pessoa_repository = PessoaRepository(db=db)
-pessoa_service = PessoaService(pessoa_repository)
+subjects_repository = SubjectsRepository(db=db)
+subjects_service = SubjectsService(subjects_repository)
 
 app = server.prepare(db=db,
                      authenticator_service=authenticator_service,
                      aws_client=aws_client,
                      atendimento_service=atendimento_service,
-                     unidade_service=unidade_service,
-                     agendamento_service=agendamento_service,
-                     assunto_service=assunto_service,
-                     pessoa_service=pessoa_service
+                     units_service=units_service,
+                     appointments_service=appointments_service,
+                     subjects_service=subjects_service,
+                     schedules_service=schedules_service
                      )
 
 
